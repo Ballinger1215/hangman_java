@@ -146,94 +146,69 @@ public class HangMan {
     
     private static void scores() throws IOException {
         
-                String filename = "scores.txt";
-                FileWriter fw = new FileWriter(filename, true);
-                PrintWriter outputfile = new PrintWriter(fw);
-                File file = new File(filename);
+                String filename = "scores.txt"; // filename
                 
+                File file = new File(filename); // open the file
                 Scanner inputFile = new Scanner(file);
+                
                 while(inputFile.hasNext()){
                 
                 String line = inputFile.nextLine();
                 System.out.println(line);
-    }
                 
-                inputFile.close();
+                }
+                
+                inputFile.close(); // close the file
                 
     }
     
     private static void addWords() throws IOException {
         
-        Scanner ip = new Scanner(System.in);
-        String[] addWord = new String[2];
         int input = 0;
-        String words = "words.txt";
+        String word = new String();
+        String gamewords = "words.txt"; // filename
+        
+        Scanner ip = new Scanner(System.in);
+        Scanner checkWord = new Scanner(System.in);
         
         do {
-            System.out.println("Choose one of the options" + "\n 1. Add Word" + "\n 2. Add another word" + "\n 3. Show word" + "\n 4. Exit");
+            System.out.println("Choose one of the options" + "\n 1. Add Word" + "\n 2. Show added words" + "\n 3. exit");
             input = ip.nextInt();
+            word = (ip.nextLine());
 
             if (input == 1) {
                 
-                // to add word to the hangman game
-                System.out.println("Add word to the the Hangman game:\t");
-                addWord[0] = ip.next();
-                
-                //String filename = "words.txt";
-                FileWriter fw = new FileWriter(words, true);
+                FileWriter fw = new FileWriter(gamewords, true);
                 PrintWriter outputfile = new PrintWriter(fw);
-                File file = new File(words);
                 
-                Scanner inputFile = new Scanner(file);
-                while(inputFile.hasNext()){
+                // to add word to the hangman game
+                System.out.println("Add word to the the Hangman game: ");
+                word = (ip.nextLine());
                 
-                String line = inputFile.nextLine();
-                System.out.println(line);
+                outputFile.println(word);
+                outputFile.close();
                 
-            }
+                System.out.println("Do you want to add another word to the Game: ")
+                answer = new String(checkWord.next());
                 
-                inputFile.close();
+                }while(answer.charAt(0) == 'y');
                 
             } else if (input == 2) {
                 
-                // to add another word to the hangman game
-                System.out.println("Add another word:\t");
-                addWord[1] = ip.next();
-                
-                //String filename = "words.txt";
-                FileWriter fw = new FileWriter(words, true);
-                PrintWriter outputfile = new PrintWriter(fw);
-                File file = new File(words);
-                
+                File file = new File(gamewords);
                 Scanner inputFile = new Scanner(file);
+                
                 while(inputFile.hasNext()){
-                
-                String line = inputFile.nextLine();
-                System.out.println(line);
-                
-            }
+                    
+                    String line = inputFile.nextLine();
+                    System.out.println(line);
+                }
                 
                 inputFile.close();
                 
-            
-            
-            } else if (input == 3) {
-                
-                //String filename = "words.txt";
-                File file = new File(words);
-                
-                Scanner inputFile = new Scanner(file);
-                while(inputFile.hasNext()){
-                
-                String line = inputFile.nextLine();
-                System.out.println(line);
-                
-            }
-                
-                inputFile.close();
             }
 
-            } while (input != 4);                      
+            } while (input != 3);                      
         
     }
 
