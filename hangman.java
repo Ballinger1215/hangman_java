@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package hangman;
 
 import java.io.File;
@@ -30,7 +25,7 @@ public class HangMan {
             input = scan.nextInt();
 
             if (input == 1) {
-                gamePlay();
+                gameController();
             } else if (input == 2) {
                 scores();
             } else if (input == 3) {
@@ -41,7 +36,7 @@ public class HangMan {
 
     }
 
-    private static void gamePlay() throws IOException {
+    public static void gameController() throws IOException {
 
         Scanner scan = new Scanner(System.in);
         Random rand = new Random();
@@ -166,50 +161,52 @@ public class HangMan {
         
         int input = 0;
         String word = new String();
+        String answer;
         String gamewords = "words.txt"; // filename
         
         Scanner ip = new Scanner(System.in);
         Scanner checkWord = new Scanner(System.in);
         
         do {
-            System.out.println("Choose one of the options" + "\n 1. Add Word" + "\n 2. Show added words" + "\n 3. exit");
-            input = ip.nextInt();
-            word = (ip.nextLine());
-
-            if (input == 1) {
-                
-                FileWriter fw = new FileWriter(gamewords, true);
-                PrintWriter outputfile = new PrintWriter(fw);
-                
-                // to add word to the hangman game
-                System.out.println("Add word to the the Hangman game: ");
+                System.out.println("Choose one of the options" + "\n 1. Add Word" + "\n 2. Show added words" + "\n 3. exit");
+                input = ip.nextInt();
                 word = (ip.nextLine());
-                
-                outputFile.println(word);
-                outputFile.close();
-                
-                System.out.println("Do you want to add another word to the Game: ")
-                answer = new String(checkWord.next());
-                
-                }while(answer.charAt(0) == 'y');
-                
-            } else if (input == 2) {
-                
-                File file = new File(gamewords);
-                Scanner inputFile = new Scanner(file);
-                
-                while(inputFile.hasNext()){
-                    
-                    String line = inputFile.nextLine();
-                    System.out.println(line);
-                }
-                
-                inputFile.close();
-                
-            }
 
-            } while (input != 3);                      
+                if (input == 1) {
+
+                 do{
+                        FileWriter fw = new FileWriter(gamewords, true);
+                        PrintWriter outputFile = new PrintWriter(fw);
+
+                        // to add word to the hangman game
+                        System.out.println("Add word to the the Hangman game: ");
+                        word = (ip.nextLine());
+
+                        outputFile.println(word);
+                        outputFile.close();
+
+                        System.out.println("Do you want to add another word to the Game: ");
+                        answer = new String(checkWord.next());
+
+                    }while(answer.charAt(0) == 'y');
+
+                }else if(input == 2) {
+
+                        File file = new File(gamewords);
+                        Scanner inputFile = new Scanner(file);
+
+                        while(inputFile.hasNext()){
+
+                            String line = inputFile.nextLine();
+                            System.out.println(line);
+                        }
+
+                        inputFile.close();
+
+                }
+
+            }while(input != 3);                      
         
     }
-
+    
 }
